@@ -18,15 +18,15 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
   getPrayerTimes() async {
     final pos = await prayerService.getPosition();
 
-    try {
-      final prayer_times =
-          await prayerService.getPrayers(pos.latitude, pos.longitude);
-      setState(() {
-        _prayer_times = prayer_times;
-      });
-    } catch (e) {
-      print(e);
-    }
+    // try {
+    //   final prayer_times =
+    //       await prayerService.getPrayers(pos.latitude, pos.longitude);
+    //   setState(() {
+    //     _prayer_times = prayer_times;
+    //   });
+    // } catch (e) {
+    //   print(e);
+    // }
   }
 
   @override
@@ -40,21 +40,28 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
     return Scaffold(
       appBar: AppBar(),
       drawer: MyDrawer(),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(25),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(_prayer_times?.Fajr.toString() ?? "hello"),
-              Text(_prayer_times?.Dhuhr.toString() ?? "hello"),
-              Text(_prayer_times?.Asr.toString() ?? "hello"),
-              Text(_prayer_times?.Maghrib.toString() ?? "hello"),
-              Text(_prayer_times?.Isha.toString() ?? "hello"),
-            ],
-          ),
-        ),
+      body: Center(
+        child: Text("hello world"),
       ),
     );
   }
 }
+
+//   SafeArea newMethod() {
+//     return SafeArea(
+//       child: Padding(
+//         padding: const EdgeInsets.all(25),
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.spaceAround,
+//           children: [
+//             Text(_prayer_times?.Fajr.toString() ?? "hello"),
+//             Text(_prayer_times?.Dhuhr.toString() ?? "hello"),
+//             Text(_prayer_times?.Asr.toString() ?? "hello"),
+//             Text(_prayer_times?.Maghrib.toString() ?? "hello"),
+//             Text(_prayer_times?.Isha.toString() ?? "hello"),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

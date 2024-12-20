@@ -8,7 +8,6 @@ import 'package:iqra/pages/read_quran/surah_quran.dart';
 import 'package:iqra/utils/read_quran/surah_tile.dart';
 import 'package:iqra/utils/my_drawer.dart';
 
-
 class SelectSurhasPage extends StatefulWidget {
   SelectSurhasPage({super.key});
 
@@ -65,48 +64,58 @@ class _SelectSurhasPageState extends State<SelectSurhasPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //nav bar
+        //nav bar
 
-      drawer: MyDrawer(),
-      // app bar
-      appBar: AppBar(
-        title: Text(
-          "IQRA",
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SearchQuranPage(),
+        drawer: MyDrawer(),
+        // app bar
+        appBar: AppBar(
+          title: Text(
+            "IQRA",
+          ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchQuranPage(),
+                ),
               ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
 
-      // to seprate the code a bit
+        // to seprate the code a bit
 
-      body: ListView.builder(
-        itemCount: surahs.length,
-        itemBuilder: (context, index) {
-          return SurahTile(
-            s: surahs[index],
-            i: index,
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SurahQuranPage(
-                      i: index,
-                      s: surahs[index],
-                    ),
-                  ));
-            },
-          );
-        },
-      ),
-    );
+        body: FutureBuilder(
+          future: getData(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: surahs.length,
+                itemBuilder: (context, index) {
+                  return SurahTile(
+                    s: surahs[index],
+                    i: index,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SurahQuranPage(
+                              i: index,
+                              s: surahs[index],
+                            ),
+                          ));
+                    },
+                  );
+                },
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ));
   }
 }
