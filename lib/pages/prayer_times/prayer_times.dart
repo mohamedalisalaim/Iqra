@@ -18,21 +18,21 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
   getPrayerTimes() async {
     final pos = await prayerService.getPosition();
 
-    // try {
-    //   final prayer_times =
-    //       await prayerService.getPrayers(pos.latitude, pos.longitude);
-    //   setState(() {
-    //     _prayer_times = prayer_times;
-    //   });
-    // } catch (e) {
-    //   print(e);
-    // }
+    try {
+      final prayer_times =
+          await prayerService.getPrayers(pos.latitude, pos.longitude);
+      setState(() {
+        _prayer_times = prayer_times;
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
   void initState() {
-    super.initState();
     getPrayerTimes();
+    super.initState();
   }
 
   @override
@@ -41,7 +41,7 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
       appBar: AppBar(),
       drawer: MyDrawer(),
       body: Center(
-        child: Text("hello world"),
+        child: Text(_prayer_times!.Fajr.toString()),
       ),
     );
   }

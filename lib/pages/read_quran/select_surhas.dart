@@ -90,7 +90,7 @@ class _SelectSurhasPageState extends State<SelectSurhasPage> {
         body: FutureBuilder(
           future: getData(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
+            if (snapshot.hasData == false) {
               return ListView.builder(
                 itemCount: surahs.length,
                 itemBuilder: (context, index) {
