@@ -50,8 +50,11 @@ class _SurhasPageState extends State<SurhasPage> {
         child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                Spacer(),
                 const Text("Iqra", style: TextStyle(fontSize: 24)),
+                Spacer(),
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.search_outlined),
@@ -67,27 +70,27 @@ class _SurhasPageState extends State<SurhasPage> {
                 ),
               ],
             ),
-            const Text(
-              "read and listen to quran to read and listen to the real wisdom",
-              style: TextStyle(fontSize: 24),
-            ),
+           
             (s.isNotEmpty)
                 ? Expanded(
                     child: ListView.builder(
                       itemCount: s.length,
                       itemBuilder: (context, index) {
-                        return SurahTile(
-                          s: s[index],
-                          i: index,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    ReadQuranPage(s: s[index], i: index),
-                              ),
-                            );
-                          },
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SurahTile(
+                            s: s[index],
+                            i: index,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ReadQuranPage(s: s[index], i: index),
+                                ),
+                              );
+                            },
+                          ),
                         );
                       },
                     ),

@@ -18,6 +18,9 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
 
     final _p = await _prayers.getPrayers(pos.latitude, pos.longitude);
 
+    print(_p);
+    print(p);
+
     setState(() {
       p = _p;
     });
@@ -33,8 +36,11 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Center(
-        child: (p == null)
-            ? Column(
+        child: (p != null)
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text("Fajr: ${p?.Fajr}"),
@@ -43,9 +49,6 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
                   Text("Maghrib: ${p?.Maghrib}"),
                   Text("Isha: ${p?.Isha}"),
                 ],
-              )
-            : Center(
-                child: CircularProgressIndicator(),
               ),
       ),
     );
