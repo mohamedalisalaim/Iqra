@@ -11,8 +11,6 @@ import 'package:iqra/models/surah.dart';
 import 'package:iqra/utlis/arabic_numbers.dart';
 import 'package:provider/provider.dart';
 
-import 'quran_settings_page.dart';
-
 class ReadQuranPage extends StatefulWidget {
   final Surah s;
   final int i;
@@ -81,7 +79,11 @@ class _ReadQuranPageState extends State<ReadQuranPage> {
 
             // controllers here
             const SizedBox(height: 5),
-            AudioPlayerControllers(r: reciters),
+            AudioPlayerControllers(
+              r: reciters,
+              initalySelected: reciters[0],
+              i: widget.i,
+            ),
             const SizedBox(height: 5),
           ],
         ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:iqra/models/quran_settings.dart';
 import 'package:iqra/models/surah.dart';
+import 'package:provider/provider.dart';
 
 class WholeTextQuran extends StatelessWidget {
   final Surah s;
@@ -15,12 +17,12 @@ class WholeTextQuran extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(25),
       child: SingleChildScrollView(
-        child:
-          Text(
-            s.ar,
-            textDirection: TextDirection.rtl,
-          ),
-        
+        child: Text(
+          s.ar,
+          textDirection: TextDirection.rtl,
+          style: TextStyle(
+              fontFamily: Provider.of<QuranSettings>(context).fontNameQuran),
+        ),
       ),
     );
   }

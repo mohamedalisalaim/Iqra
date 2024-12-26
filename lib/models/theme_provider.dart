@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 class ThemeProvider extends ChangeNotifier {
   static final ThemeData darkMode = ThemeData(
     brightness: Brightness.dark,
-    colorScheme: const ColorScheme.dark(
+    colorScheme: ColorScheme.dark(
       // background
-      surface: Color.fromRGBO(16, 16, 18, 1),
+      surface: const Color.fromRGBO(16, 16, 18, 1),
 
       // green color for buttons
-      primary: Color.fromRGBO(125, 226, 96, 1),
+      primary: const Color.fromRGBO(125, 226, 96, 1),
 
       // secondary for interactive objects
-      secondary: Color.fromRGBO(133, 133, 134, 1),
+      secondary: Colors.grey.shade500,
     ),
   );
 
@@ -25,7 +25,7 @@ class ThemeProvider extends ChangeNotifier {
       primary: const Color.fromRGBO(125, 226, 96, 1),
 
       // secondary for interactive objects
-      secondary: Colors.grey[200]!,
+      secondary: Colors.grey.shade200,
     ),
   );
 
@@ -46,6 +46,5 @@ class ThemeProvider extends ChangeNotifier {
     } else {
       themeData = lightMode;
     }
-    notifyListeners();
   }
 }

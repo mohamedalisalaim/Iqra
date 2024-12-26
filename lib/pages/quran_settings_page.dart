@@ -5,7 +5,7 @@ import 'package:iqra/models/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class QuranSettingsPage extends StatefulWidget {
-  QuranSettingsPage({Key? key}) : super(key: key);
+  const QuranSettingsPage({super.key});
 
   @override
   _QuranSettingsPageState createState() => _QuranSettingsPageState();
@@ -16,49 +16,50 @@ class _QuranSettingsPageState extends State<QuranSettingsPage> {
   Widget build(BuildContext context) {
     return Consumer<QuranSettings>(
       builder: (context, value, child) => Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Text("Settings"),
+        ),
         body: SafeArea(
-          child: Column(
-            children: [
-              // for isWordByWord swith
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("isWordByWord"),
-                    CupertinoSwitch(
-                      value: value.isWordByWord,
-                      onChanged: (type) {
-                        value.isWordByWord = type;
-                        // setState(() {});
-                      },
-                    ),
-                  ],
+          child: Padding(
+            padding: const EdgeInsets.all(25),
+            child: Column(
+              children: [
+                // for isWordByWord swith
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("isWordByWord"),
+                      CupertinoSwitch(
+                        value: value.isWordByWord,
+                        onChanged: (type) {
+                          value.isWordByWord = type;
+                          // setState(() {});
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
 
-              // theme modes
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("dark mode"),
-                    CupertinoSwitch(
-                      value: Provider.of<ThemeProvider>(context, listen: false)
-                          .isDarkMode,
-                      onChanged: (type) {
-                        print(type);
-                        print(value.isWordByWord);
-
-                        Provider.of<ThemeProvider>(context, listen: false)
-                            .toggleTheme();
-                       
-                      },
-                    ),
-                  ],
+                // theme modes
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("dark mode"),
+                      CupertinoSwitch(
+                        value:
+                            Provider.of<ThemeProvider>(context, listen: false)
+                                .isDarkMode,
+                        onChanged: (type) =>
+                            Provider.of<ThemeProvider>(context, listen: false)
+                                .toggleTheme(),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

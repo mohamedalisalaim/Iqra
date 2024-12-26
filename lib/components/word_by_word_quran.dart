@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iqra/models/surah.dart';
+import 'package:provider/provider.dart';
+
+import '../models/quran_settings.dart';
 
 class WordByWordQuran extends StatefulWidget {
   final Surah s;
@@ -23,12 +26,11 @@ class _WordByWordQuranState extends State<WordByWordQuran> {
         return Container(
           child: Column(
             children: [
-              Text(widget.s.array[index]["ar"]),
-              // Dialog(),
-              // IconButton(
-              // icon: Icon(Icons.play_arrow_rounded),
-              // onPressed: () {},
-              // )
+              Text(
+                widget.s.array[index]["ar"],
+                style: TextStyle(
+                    fontFamily: Provider.of<QuranSettings>(context).fontName),
+              ),
             ],
           ),
         );

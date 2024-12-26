@@ -8,6 +8,15 @@ class QuranAudioService {
   static const String BASE_URL =
       "https://cdn.islamic.network/quran/audio-surah";
 
+  Future<bool> checkFileExit(String name, int number, String bitrate) async {
+    Directory dir = await getApplicationDocumentsDirectory();
+    if (File('${dir.path}/$name/surah_${number}_$bitrate.mp4').existsSync()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future downloadAudioFile(
       String identifier, int number, String bitrate) async {
     var permission = await Permission.storage.request();

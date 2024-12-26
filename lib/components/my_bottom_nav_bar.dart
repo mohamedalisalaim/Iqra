@@ -10,22 +10,24 @@ class MyBottomNavBar extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(25),
       child: GNav(
-          onTabChange: (value) => onTabChange!(value),
-          tabBorderRadius: 24,
-          tabs: const [
-            GButton(
-              icon: Icons.access_time,
-              text: "Prayer Times",
-            ),
-            GButton(
-              icon: Icons.book_sharp,
-              text: "Quran",
-            ),
-            // GButton(
-            //   icon: Icons.compass_calibration,
-            //   text: "Compass",
-            // ),
-          ]),
+        activeColor: Theme.of(context).colorScheme.primary,
+        onTabChange: (value) => onTabChange!(value),
+        tabBorderRadius: 24,
+        tabs: const [
+          GButton(
+            icon: Icons.access_time,
+            text: "Prayer Times",
+          ),
+          GButton(
+            icon: Icons.book_sharp,
+            text: "Quran",
+          ),
+          GButton(
+            icon: Icons.compass_calibration,
+            text: "Qiblah",
+          ),
+        ],
+      ),
     );
   }
 }

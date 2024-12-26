@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:iqra/components/surah_tile.dart';
 import 'package:iqra/models/surah.dart';
 import 'package:iqra/pages/quran_settings_page.dart';
-import 'package:iqra/pages/read_quran.dart';
+import 'package:iqra/pages/read_quran_page.dart';
 
 class SurhasPage extends StatefulWidget {
-  SurhasPage({super.key});
+  const SurhasPage({super.key});
 
   @override
   _SurhasPageState createState() => _SurhasPageState();
@@ -20,7 +20,7 @@ class _SurhasPageState extends State<SurhasPage> {
     var jsonString = await rootBundle.loadString("lib/assets/quran.json");
     var json = jsonDecode(jsonString);
 
-    for (int i = 0; i < 113; i++) {
+    for (int i = 0; i < 114; i++) {
       final _s = Surah(
         name: json[i]["name"],
         name_en: json[i]["name_en"],
@@ -50,11 +50,13 @@ class _SurhasPageState extends State<SurhasPage> {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Spacer(),
-                const Text("Iqra", style: TextStyle(fontSize: 24)),
-                Spacer(),
+                const Spacer(),
+                const Text("Iqra",
+                    style:
+                        TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                const Spacer(),
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.search_outlined),
@@ -63,21 +65,21 @@ class _SurhasPageState extends State<SurhasPage> {
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => QuranSettingsPage(),
+                      builder: (context) => const QuranSettingsPage(),
                     ),
                   ),
                   icon: const Icon(Icons.settings_rounded),
                 ),
               ],
             ),
-           
             (s.isNotEmpty)
                 ? Expanded(
                     child: ListView.builder(
                       itemCount: s.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.only(
+                              left: 25, right: 25, bottom: 25),
                           child: SurahTile(
                             s: s[index],
                             i: index,
@@ -95,7 +97,11 @@ class _SurhasPageState extends State<SurhasPage> {
                       },
                     ),
                   )
-                : const CircularProgressIndicator()
+                : Center(
+                    child: CircularProgressIndicator(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  )
           ],
         ),
       ),

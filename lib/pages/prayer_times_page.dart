@@ -3,7 +3,7 @@ import 'package:iqra/models/prayer.dart';
 import 'package:iqra/services/prayer_times_service.dart';
 
 class PrayerTimesPage extends StatefulWidget {
-  PrayerTimesPage({Key? key}) : super(key: key);
+  const PrayerTimesPage({super.key});
 
   @override
   _PrayerTimesPageState createState() => _PrayerTimesPageState();
@@ -14,16 +14,17 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
   Prayer? p;
 
   getPrayersTimes() async {
-    final pos = await _prayers.getCurrentLocation();
+    try {
+      final pos = await _prayers.getCurrentLocation();
 
-    final _p = await _prayers.getPrayers(pos.latitude, pos.longitude);
+      final _p = await _prayers.getPrayers(pos.latitude, pos.longitude);
 
-    print(_p);
-    print(p);
-
-    setState(() {
-      p = _p;
-    });
+      setState(() {
+        p = _p;
+      });
+    } catch (e) {
+      return Exception("help me pleases");
+    }
   }
 
   @override
@@ -36,18 +37,77 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Center(
-        child: (p != null)
-            ? Center(
-                child: CircularProgressIndicator(),
+        child: p == null
+            ? CircularProgressIndicator(
+                color: Theme.of(context).colorScheme.primary,
               )
             : Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text("Fajr: ${p?.Fajr}"),
-                  Text("Dhuhr: ${p?.Dhuhr}"),
-                  Text("Asr: ${p?.Asr}"),
-                  Text("Maghrib: ${p?.Maghrib}"),
-                  Text("Isha: ${p?.Isha}"),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    child: Text(
+                      "Fajr: ${p?.Fajr ?? "Not available"}",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ),
+                  //
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    child: Text(
+                      "Dhuhr: ${p?.Dhuhr ?? "Not available"}",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ),
+                  //
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    child: Text(
+                      "Asr: ${p?.Asr ?? "Not available"}",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ),
+                  //
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    child: Text(
+                      "Maghrib: ${p?.Maghrib ?? "Not available"}",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ),
+                  //
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    child: Text(
+                      "Isha: ${p?.Isha ?? "Not available"}",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ),
                 ],
               ),
       ),

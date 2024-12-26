@@ -5,7 +5,8 @@ class QuranSettings extends ChangeNotifier {
   bool isWordByWord = false;
   bool showEnglishText = false;
   // fonts
-  String fontName = "Amiri";
+  String fontNameQuran = "Kfg";
+  String fontName = "Cairo";
   int fontSize = 20;
   bool fontBold = false;
 
