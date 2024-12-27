@@ -52,7 +52,7 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
                     child: Text(
                       "Fajr: ${p?.Fajr ?? "Not available"}",
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize:24,
                       ),
                     ),
                   ),
@@ -65,7 +65,7 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
                     child: Text(
                       "Dhuhr: ${p?.Dhuhr ?? "Not available"}",
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize:24,
                       ),
                     ),
                   ),
@@ -78,7 +78,7 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
                     child: Text(
                       "Asr: ${p?.Asr ?? "Not available"}",
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize:24,
                       ),
                     ),
                   ),
@@ -91,12 +91,13 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
                     child: Text(
                       "Maghrib: ${p?.Maghrib ?? "Not available"}",
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize:24,
                       ),
                     ),
                   ),
                   //
                   Container(
+                    margin: EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: Theme.of(context).colorScheme.primary,
@@ -104,7 +105,7 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
                     child: Text(
                       "Isha: ${p?.Isha ?? "Not available"}",
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize:24,
                       ),
                     ),
                   ),

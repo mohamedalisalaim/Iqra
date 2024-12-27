@@ -83,6 +83,7 @@ class _ReadQuranPageState extends State<ReadQuranPage> {
               r: reciters,
               reciter: reciters[0],
               i: widget.i,
+              s: widget.s,
             ),
             const SizedBox(height: 5),
           ],

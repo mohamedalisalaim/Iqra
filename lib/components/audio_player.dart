@@ -1,24 +1,21 @@
-// a +10 in and rewind -10 s and puase and play button
-// chose recreate
-
-import 'dart:io';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:iqra/models/reciter.dart';
+import 'package:iqra/models/surah.dart';
 import 'package:iqra/services/quran_audio_service.dart';
-import 'package:path_provider/path_provider.dart';
 
 class AudioPlayerControllers extends StatefulWidget {
   final List<Reciter> r;
   Reciter reciter;
   int i;
+  final Surah s;
 
   AudioPlayerControllers({
     super.key,
     required this.r,
     required this.reciter,
     required this.i,
+    required this.s,
   });
 
   @override
@@ -30,6 +27,7 @@ class _AudioPlayerControllersState extends State<AudioPlayerControllers> {
 
   late AudioPlayer audioPlayer;
   Duration duration = Duration.zero;
+  Duration position = Duration.zero;
   bool isPlaying = false;
 
   @override
@@ -44,7 +42,7 @@ class _AudioPlayerControllersState extends State<AudioPlayerControllers> {
 
     audioPlayer.onPositionChanged.listen((newPos) {
       setState(() {
-        duration = newPos;
+        position = newPos;
       });
     });
 
@@ -62,14 +60,22 @@ class _AudioPlayerControllersState extends State<AudioPlayerControllers> {
     super.dispose();
   }
 
-  playSurahQuran() async {
-    var file = await quranService.downloadAudioFile(
-        widget.reciter.identifier, widget.i, widget.reciter.bitrate);
+  String formatDuration(Duration d) {
+    final minutes = d.inMinutes.remainder(60);
+    final seconds = d.inSeconds.remainder(60);
 
-    print(file);
-    print(File(file));
-    print(await File(file).exists());
-    print(File(file).existsSync());
+    return "${minutes.toString().padLeft(2, "0")}:${seconds.toString().padLeft(2, "0")}";
+  }
+
+  playSurahQuran() async {
+    String file =
+        await quranService.downloadSurhas(widget.reciter, widget.s, widget.i);
+    await audioPlayer.setSource(DeviceFileSource(file));
+    await audioPlayer.resume();
+  }
+
+  void handleSeek(double value) {
+    audioPlayer.seek(Duration(seconds: value.toInt()));
   }
 
   @override
@@ -91,6 +97,21 @@ class _AudioPlayerControllersState extends State<AudioPlayerControllers> {
           }),
         ),
 
+        // the slider
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(formatDuration(position)),
+            Slider(
+              min: 0.0,
+              max: duration.inSeconds.toDouble(),
+              value: position.inSeconds.toDouble(),
+              onChanged: handleSeek,
+            ),
+            Text(formatDuration(duration)),
+          ],
+        ),
+
         // plays buttons here
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -100,7 +121,7 @@ class _AudioPlayerControllersState extends State<AudioPlayerControllers> {
               onPressed: () {},
             ),
             IconButton(
-              icon: const Icon(Icons.play_arrow_rounded),
+              icon: (isPlaying) ? Icon(Icons.play_arrow) : Icon(Icons.pause),
               onPressed: () => playSurahQuran(),
             ),
             IconButton(
