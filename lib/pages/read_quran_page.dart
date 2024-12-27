@@ -81,7 +81,7 @@ class _ReadQuranPageState extends State<ReadQuranPage> {
             const SizedBox(height: 5),
             AudioPlayerControllers(
               r: reciters,
-              initalySelected: reciters[0],
+              reciter: reciters[0],
               i: widget.i,
             ),
             const SizedBox(height: 5),

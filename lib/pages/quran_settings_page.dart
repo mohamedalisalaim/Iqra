@@ -17,7 +17,7 @@ class _QuranSettingsPageState extends State<QuranSettingsPage> {
     return Consumer<QuranSettings>(
       builder: (context, value, child) => Scaffold(
         appBar: AppBar(
-          title: Text("Settings"),
+          title: const Text("Settings"),
         ),
         body: SafeArea(
           child: Padding(
@@ -29,7 +29,7 @@ class _QuranSettingsPageState extends State<QuranSettingsPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("isWordByWord"),
+                      const Text("isWordByWord"),
                       CupertinoSwitch(
                         value: value.isWordByWord,
                         onChanged: (type) {
@@ -46,7 +46,7 @@ class _QuranSettingsPageState extends State<QuranSettingsPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("dark mode"),
+                      const Text("dark mode"),
                       CupertinoSwitch(
                         value:
                             Provider.of<ThemeProvider>(context, listen: false)

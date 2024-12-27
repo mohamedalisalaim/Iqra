@@ -27,7 +27,7 @@ class QuranAudioService {
 
     try {
       Directory dir = await getApplicationDocumentsDirectory();
-      String filePath = '${dir.path}/$identifier/${number}_$bitrate.mp4';
+      String filePath = '${dir.path}/$identifier/${number}_$bitrate.mp3';
 
       var r = await http.get(
         Uri.parse("$BASE_URL/$bitrate/$identifier/$number.mp3"),

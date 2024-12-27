@@ -11,13 +11,13 @@ import 'package:path_provider/path_provider.dart';
 
 class AudioPlayerControllers extends StatefulWidget {
   final List<Reciter> r;
-  Reciter initalySelected;
+  Reciter reciter;
   int i;
 
   AudioPlayerControllers({
     super.key,
     required this.r,
-    required this.initalySelected,
+    required this.reciter,
     required this.i,
   });
 
@@ -63,24 +63,13 @@ class _AudioPlayerControllersState extends State<AudioPlayerControllers> {
   }
 
   playSurahQuran() async {
-    Directory dir = await getApplicationDocumentsDirectory();
-    if (await quranService.checkFileExit(widget.initalySelected.name, widget.i,
-        widget.initalySelected.bitrate)) {
-      print("Say Hey");
-      await audioPlayer.play(DeviceFileSource(
-          '${dir.path}/${widget.initalySelected.name}/${widget.i}_${widget.initalySelected.bitrate}.mp4'));
-      setState(() {
-        isPlaying = !isPlaying;
-      });
-    } else {
-      print("Say Bey");
-      final file = await quranService.downloadAudioFile(
-          widget.initalySelected.identifier,
-          widget.i,
-          widget.initalySelected.bitrate);
+    var file = await quranService.downloadAudioFile(
+        widget.reciter.identifier, widget.i, widget.reciter.bitrate);
 
-      audioPlayer.play(DeviceFileSource(file));
-    }
+    print(file);
+    print(File(file));
+    print(await File(file).exists());
+    print(File(file).existsSync());
   }
 
   @override
@@ -90,7 +79,7 @@ class _AudioPlayerControllersState extends State<AudioPlayerControllers> {
         // chose reciter
         DropdownButton<String>(
           alignment: Alignment.center,
-          value: widget.initalySelected.name,
+          value: widget.reciter.name,
           items: widget.r.map((Reciter reciter) {
             return DropdownMenuItem<String>(
               value: reciter.name,
@@ -98,8 +87,7 @@ class _AudioPlayerControllersState extends State<AudioPlayerControllers> {
             );
           }).toList(),
           onChanged: (value) => setState(() {
-            widget.initalySelected =
-                widget.r.firstWhere((r) => r.name == value);
+            widget.reciter = widget.r.firstWhere((r) => r.name == value);
           }),
         ),
 
@@ -108,15 +96,15 @@ class _AudioPlayerControllersState extends State<AudioPlayerControllers> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: Icon(Icons.replay_10_rounded),
+              icon: const Icon(Icons.replay_10_rounded),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.play_arrow_rounded),
-              onPressed: isPlaying ? audioPlayer.pause() : playSurahQuran(),
+              icon: const Icon(Icons.play_arrow_rounded),
+              onPressed: () => playSurahQuran(),
             ),
             IconButton(
-              icon: Icon(Icons.forward_10_rounded),
+              icon: const Icon(Icons.forward_10_rounded),
               onPressed: () {},
             )
           ],

@@ -23,8 +23,8 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     const PrayerTimesPage(),
-    SurhasPage(),
-    QiblahPage(),
+    const SurhasPage(),
+    const QiblahPage(),
   ];
 
   @override

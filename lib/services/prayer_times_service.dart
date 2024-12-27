@@ -13,7 +13,7 @@ class PrayerTimesService {
     final date = DateFormat('yyyy-MM-dd').format(now);
 
     final r = await http.get(Uri.parse(
-        "$BASE_URL/$date?latitude=${latitude}&longitude=${longitude}&method=1"));
+        "$BASE_URL/$date?latitude=$latitude&longitude=$longitude&method=1"));
 
     try {
       var json = jsonDecode(r.body);

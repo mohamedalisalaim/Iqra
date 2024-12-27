@@ -11,7 +11,7 @@ class ThemeProvider extends ChangeNotifier {
       primary: const Color.fromRGBO(125, 226, 96, 1),
 
       // secondary for interactive objects
-      secondary: Colors.grey.shade500,
+      secondary: Colors.grey.shade400,
     ),
   );
 
