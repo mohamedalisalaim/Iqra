@@ -19,60 +19,57 @@ class SurahTile extends StatelessWidget {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
       child: MaterialButton(
         color: Theme.of(context).colorScheme.primary,
-        //textColor: Theme.of(context).colorScheme.surface,
         onPressed: onPressed,
         padding: const EdgeInsets.all(25),
-        child: Flexible(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "${i + 1} - ${s.name_translation}",
-                    style: const TextStyle(
-                      fontFamily: "Odin",
-                    ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "${i + 1} - ${s.name_translation}",
+                  style: const TextStyle(
+                    fontFamily: "Odin",
                   ),
-                  Text(
-                    "${ArabicNumber((i + 1).toString())} - ${s.name}",
-                    textDirection: TextDirection.rtl,
-                    style: const TextStyle(
-                      fontFamily: "Cairo",
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "عدد ألاحرف: ${ArabicNumber(s.words.toString())}",
-                    style: const TextStyle(
-                      fontFamily: "Cairo",
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+                Text(
+                  "${ArabicNumber((i + 1).toString())} - ${s.name}",
+                  textDirection: TextDirection.rtl,
+                  style: const TextStyle(
+                    fontFamily: "Cairo",
+                    fontWeight: FontWeight.bold,
                   ),
-                  Text(
-                    "${s.type} - (${ArabicNumber(s.verses.toString())})",
-                    style: const TextStyle(
-                      fontFamily: "Cairo",
-                      fontWeight: FontWeight.bold,
-                    ),
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "عدد ألاحرف: ${ArabicNumber(s.words.toString())}",
+                  style: const TextStyle(
+                    fontFamily: "Cairo",
+                    fontWeight: FontWeight.bold,
                   ),
-                  Text(
-                    "عدد الكلمات: ${ArabicNumber(s.letters.toString())}",
-                    style: const TextStyle(
-                      fontFamily: "Cairo",
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
+                ),
+                Text(
+                  "${s.type} - (${ArabicNumber(s.verses.toString())})",
+                  style: const TextStyle(
+                    fontFamily: "Cairo",
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "عدد الكلمات: ${ArabicNumber(s.letters.toString())}",
+                  style: const TextStyle(
+                    fontFamily: "Cairo",
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              ],
+            )
+          ],
         ),
       ),
     );
