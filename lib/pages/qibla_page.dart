@@ -35,9 +35,7 @@ class _QiblaPageState extends State<QiblaPage> {
   getPermissions() {
     Permission.locationWhenInUse.status.then((value) {
       if (mounted) {
-        setState(() {
-          _hasPermissions = (value == PermissionStatus.granted);
-        });
+        setState(() => _hasPermissions = value == PermissionStatus.granted);
       }
     });
   }
@@ -113,12 +111,15 @@ class _QiblaPageState extends State<QiblaPage> {
   }
 
   _buildPermission() {
-    
-    Permission.locationWhenInUse.request().then(
-      (value) {
-        getPermissions();
-      },
+     return Center(
+      child: ElevatedButton(
+        child: const Text('Request Permissions'),
+        onPressed: () {
+          Permission.locationWhenInUse.request().then((ignored) {
+            getPermissions();
+          });
+        },
+      ),
     );
-   return CircularProgressIndicator();
   }
 }
