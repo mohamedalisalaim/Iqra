@@ -22,7 +22,7 @@ class SurahTile extends StatelessWidget {
         //textColor: Theme.of(context).colorScheme.surface,
         onPressed: onPressed,
         padding: const EdgeInsets.all(25),
-        child: Expanded(
+        child: Flexible(s
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
