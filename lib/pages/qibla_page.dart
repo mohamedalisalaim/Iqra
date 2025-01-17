@@ -20,9 +20,9 @@ class _QiblaPageState extends State<QiblaPage> {
 
   getQiblaDir() async {
     try {
-      //final pos = await _prayers.getCurrentLocation();
-      //final cord = _prayers.getCord(pos);
-      final cord = Coordinate(21.5194682, -0.1360365);
+      final pos = await _prayers.getCurrentLocation();
+      final cord = _prayers.getCord(pos);
+      //final cord = Coordinate(21.5194682, -0.1360365);
 
       setState(() {
         qiblaDir = QiblaDirection.find(cord);
@@ -35,15 +35,16 @@ class _QiblaPageState extends State<QiblaPage> {
   getPermissions() {
     Permission.locationWhenInUse.status.then((value) {
       if (mounted) {
-        setState(() => _hasPermissions = value == PermissionStatus.granted);
+        setState(() => _hasPermissions = (value == PermissionStatus.granted));
       }
     });
   }
 
   @override
   void initState() {
-    getQiblaDir();
     getPermissions();
+    getQiblaDir();
+
     super.initState();
   }
 
@@ -80,42 +81,42 @@ class _QiblaPageState extends State<QiblaPage> {
 
         if (dir == null) {
           return Text("your device does not support compass");
-        } else {
-          return Center(
-            child: Column(
-              children: [
-                Transform.rotate(
-                  angle: dir * (math.pi / 180) * -1,
-                  child: Image.asset(
-                    "lib/assets/image/indicator.png",
-                  ),
-                ),
-                Transform.rotate(
-                  angle: (dir * (math.pi / 180) * -1) - (qiblaDir ?? 0),
-                  child: Image.asset(
-                    "lib/assets/image/indicator.png",
-                  ),
-                ),
-                Transform.rotate(
-                  angle: (qiblaDir ?? 0),
-                  child: Image.asset(
-                    "lib/assets/image/indicator.png",
-                  ),
-                ),
-              ],
-            ),
-          );
         }
+
+        return Center(
+          child: Column(
+            children: [
+              Transform.rotate(
+                angle: dir * (math.pi / 180) * -1,
+                child: Image.asset(
+                  "lib/assets/image/indicator.png",
+                ),
+              ),
+              Transform.rotate(
+                angle: (dir * (math.pi / 180) * -1) - (qiblaDir ?? 0),
+                child: Image.asset(
+                  "lib/assets/image/indicator.png",
+                ),
+              ),
+              Transform.rotate(
+                angle: (qiblaDir ?? 0),
+                child: Image.asset(
+                  "lib/assets/image/indicator.png",
+                ),
+              ),
+            ],
+          ),
+        );
       },
     );
   }
 
   _buildPermission() {
-     return Center(
+    return Center(
       child: ElevatedButton(
         child: const Text('Request Permissions'),
         onPressed: () {
-          Permission.locationWhenInUse.request().then((ignored) {
+          Permission.locationWhenInUse.request().then((value) {
             getPermissions();
           });
         },
