@@ -1,6 +1,6 @@
 class Surah {
   final String name;
-  final String name_en;
+  final String name_translation;
 
   final int words;
   final int letters;
@@ -13,7 +13,7 @@ class Surah {
 
   Surah({
     required this.name,
-    required this.name_en,
+    required this.name_translation,
     required this.words,
     required this.letters,
     required this.verses,

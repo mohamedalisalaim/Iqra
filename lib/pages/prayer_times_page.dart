@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iqra/components/prayer_tile.dart';
 import 'package:iqra/models/prayer.dart';
 import 'package:iqra/services/prayer_times_service.dart';
 
@@ -36,82 +37,44 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Center(
-        child: p == null
-            ? CircularProgressIndicator(
-                color: Theme.of(context).colorScheme.primary,
-              )
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Center(
+      child: Container(
+        padding: const EdgeInsets.all(25),
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                "Prayer Times",
+                style: TextStyle(
+                    fontFamily: "Odin",
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            Flexible(
+              child: ListView(
+                padding: const EdgeInsets.all(25),
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    child: Text(
-                      "Fajr: ${p?.Fajr ?? "Not available"}",
-                      style: TextStyle(
-                        fontSize:24,
-                      ),
-                    ),
-                  ),
-                  //
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    child: Text(
-                      "Dhuhr: ${p?.Dhuhr ?? "Not available"}",
-                      style: TextStyle(
-                        fontSize:24,
-                      ),
-                    ),
-                  ),
-                  //
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    child: Text(
-                      "Asr: ${p?.Asr ?? "Not available"}",
-                      style: TextStyle(
-                        fontSize:24,
-                      ),
-                    ),
-                  ),
-                  //
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    child: Text(
-                      "Maghrib: ${p?.Maghrib ?? "Not available"}",
-                      style: TextStyle(
-                        fontSize:24,
-                      ),
-                    ),
-                  ),
-                  //
-                  Container(
-                    margin: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    child: Text(
-                      "Isha: ${p?.Isha ?? "Not available"}",
-                      style: TextStyle(
-                        fontSize:24,
-                      ),
-                    ),
-                  ),
+                  PrayerTile(text: "Fajr", time: p?.Fajr ?? "Not available"),
+                  PrayerTile(
+                      text: "Sunrise", time: p?.Sunrise ?? "Not available"),
+                  PrayerTile(text: "Dhuhr", time: p?.Dhuhr ?? "Not available"),
+                  PrayerTile(text: "Asr", time: p?.Asr ?? "Not available"),
+                  PrayerTile(
+                      text: "Sunset", time: p?.Sunset ?? "Not available"),
+                  PrayerTile(
+                      text: "Maghrib", time: p?.Maghrib ?? "Not available"),
+                  PrayerTile(text: "Isha", time: p?.Isha ?? "Not available"),
+                  PrayerTile(text: "Imsak", time: p?.Imsak ?? "Not available"),
+                  PrayerTile(
+                      text: "Midnight", time: p?.Midnight ?? "Not available"),
                 ],
               ),
+            ),
+          ],
+        ),
       ),
-    );
+    ));
   }
 }

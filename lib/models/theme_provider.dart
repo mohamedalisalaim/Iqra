@@ -11,7 +11,7 @@ class ThemeProvider extends ChangeNotifier {
       primary: const Color.fromRGBO(125, 226, 96, 1),
 
       // secondary for interactive objects
-      secondary: Colors.grey.shade400,
+      secondary: Colors.grey.shade900,
     ),
   );
 
@@ -25,11 +25,11 @@ class ThemeProvider extends ChangeNotifier {
       primary: const Color.fromRGBO(125, 226, 96, 1),
 
       // secondary for interactive objects
-      secondary: Colors.grey.shade200,
+      secondary: Colors.grey.shade100,
     ),
   );
 
-  ThemeData _themeData = darkMode;
+  ThemeData _themeData = lightMode;
 
   ThemeData get themeData => _themeData;
 

@@ -3,7 +3,7 @@ import 'package:iqra/components/my_bottom_nav_bar.dart';
 import 'package:iqra/pages/prayer_times_page.dart';
 import 'package:iqra/pages/surhas_page.dart';
 
-import 'qiblah_page.dart';
+import 'qibla_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const PrayerTimesPage(),
     const SurhasPage(),
-    const QiblahPage(),
+    const QiblaPage(),
   ];
 
   @override

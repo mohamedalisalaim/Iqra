@@ -8,23 +8,25 @@ class MyBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(25),
+      margin: const EdgeInsets.only(bottom: 16, left: 24, right: 24),
       child: GNav(
         activeColor: Theme.of(context).colorScheme.primary,
         onTabChange: (value) => onTabChange!(value),
-        tabBorderRadius: 24,
+        tabBorderRadius: 12,
+        gap: 12,
         tabs: const [
           GButton(
-            icon: Icons.access_time,
+            icon: Icons.timer_rounded,
             text: "Prayer Times",
           ),
           GButton(
-            icon: Icons.book_sharp,
+            // i did not find better than this menu icon
+            icon: Icons.menu_book_rounded,
             text: "Quran",
           ),
           GButton(
-            icon: Icons.compass_calibration,
-            text: "Qiblah",
+            icon: Icons.mosque_rounded,
+            text: "Qibla",
           ),
         ],
       ),

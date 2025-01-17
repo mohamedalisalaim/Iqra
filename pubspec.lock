@@ -472,6 +472,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.2"
+  qibla_direction:
+    dependency: "direct main"
+    description:
+      name: qibla_direction
+      sha256: "024f1b845bc4452d87a35fccc6aeca9ffc6af6bba96f611a5a408e8eb4b35593"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   sky_engine:
     dependency: transitive
     description: flutter

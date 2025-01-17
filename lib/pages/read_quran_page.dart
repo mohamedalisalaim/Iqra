@@ -56,36 +56,32 @@ class _ReadQuranPageState extends State<ReadQuranPage> {
       builder: (context, value, child) => Scaffold(
         // the app Bar
         appBar: AppBar(
+          centerTitle: true,
           title: Text(
             "${ArabicNumber((widget.i + 1).toString())}. ${widget.s.name}",
             textDirection: TextDirection.rtl,
+            style: const TextStyle(
+                fontFamily: "Cairo", fontWeight: FontWeight.bold),
           ),
-          actions: [
-            // change the reading type to another
-            IconButton(
-              onPressed: changeReadType,
-              icon: const Icon(Icons.book_rounded),
-            ),
-          ],
         ),
 
         //the body
         body: Column(
           children: [
             // quran text
-            (value.isWordByWord)
-                ? Expanded(child: WordByWordQuran(s: widget.s, i: widget.i))
-                : Expanded(child: WholeTextQuran(s: widget.s, i: widget.i)),
+            (value.verseByVerse)
+                ? Flexible(child: WordByWordQuran(s: widget.s, i: widget.i))
+                : Flexible(child: WholeTextQuran(s: widget.s, i: widget.i)),
 
             // controllers here
-            const SizedBox(height: 5),
-            AudioPlayerControllers(
-              r: reciters,
-              reciter: reciters[0],
-              i: widget.i,
-              s: widget.s,
-            ),
-            const SizedBox(height: 5),
+            // const SizedBox(height: 5),
+            // AudioPlayerControllers(
+            //   r: reciters,
+            //   reciter: reciters[0],
+            //   i: widget.i,
+            //   s: widget.s,
+            // ),
+            // const SizedBox(height: 5),
           ],
         ),
       ),

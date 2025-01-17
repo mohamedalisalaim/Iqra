@@ -17,11 +17,20 @@ class WholeTextQuran extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(25),
       child: SingleChildScrollView(
-        child: Text(
+        child: SelectableText(
           s.ar,
           textDirection: TextDirection.rtl,
           style: TextStyle(
-              fontFamily: Provider.of<QuranSettings>(context).fontNameQuran),
+            fontSize:
+                Provider.of<QuranSettings>(context, listen: false).fontSize,
+            fontWeight: (Provider.of<QuranSettings>(context, listen: false)
+                    .quranFontBold)
+                ? FontWeight.bold
+                : FontWeight.normal,
+            fontFamily: "Uthman",
+            height: Provider.of<QuranSettings>(context, listen: false)
+                .spaceBetweenWords,
+          ),
         ),
       ),
     );

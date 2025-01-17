@@ -29,10 +29,19 @@ class SurahTile extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("${i + 1} - ${s.name_en}"),
+                  Text(
+                    "${i + 1} - ${s.name_translation}",
+                    style: const TextStyle(
+                      fontFamily: "Odin",
+                    ),
+                  ),
                   Text(
                     "${ArabicNumber((i + 1).toString())} - ${s.name}",
                     textDirection: TextDirection.rtl,
+                    style: const TextStyle(
+                      fontFamily: "Cairo",
+                      fontWeight: FontWeight.bold,
+                    ),
                   )
                 ],
               ),
@@ -41,12 +50,24 @@ class SurahTile extends StatelessWidget {
                 children: [
                   Text(
                     "عدد ألاحرف: ${ArabicNumber(s.words.toString())}",
+                    style: const TextStyle(
+                      fontFamily: "Cairo",
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     "${s.type} - (${ArabicNumber(s.verses.toString())})",
+                    style: const TextStyle(
+                      fontFamily: "Cairo",
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     "عدد الكلمات: ${ArabicNumber(s.letters.toString())}",
+                    style: const TextStyle(
+                      fontFamily: "Cairo",
+                      fontWeight: FontWeight.bold,
+                    ),
                   )
                 ],
               )

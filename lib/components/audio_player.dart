@@ -68,10 +68,14 @@ class _AudioPlayerControllersState extends State<AudioPlayerControllers> {
   }
 
   playSurahQuran() async {
-    String file =
-        await quranService.downloadSurhas(widget.reciter, widget.s, widget.i);
-    await audioPlayer.setSource(DeviceFileSource(file));
-    await audioPlayer.resume();
+    if (isPlaying) {
+      const String BASE_URL = "https://cdn.islamic.network/quran/audio-surah";
+      await audioPlayer.setSource(UrlSource(
+          "$BASE_URL/${widget.reciter.bitrate}/${widget.reciter.identifier}/${widget.i + 1}.mp3"));
+      await audioPlayer.resume();
+    } else {
+      audioPlayer.pause();
+    }
   }
 
   void handleSeek(double value) {
@@ -99,7 +103,7 @@ class _AudioPlayerControllersState extends State<AudioPlayerControllers> {
 
         // the slider
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(formatDuration(position)),
             Slider(
@@ -122,7 +126,7 @@ class _AudioPlayerControllersState extends State<AudioPlayerControllers> {
             ),
             IconButton(
               icon: (isPlaying) ? Icon(Icons.play_arrow) : Icon(Icons.pause),
-              onPressed: () => playSurahQuran(),
+              onPressed: playSurahQuran,
             ),
             IconButton(
               icon: const Icon(Icons.forward_10_rounded),

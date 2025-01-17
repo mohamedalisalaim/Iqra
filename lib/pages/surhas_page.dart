@@ -19,11 +19,12 @@ class _SurhasPageState extends State<SurhasPage> {
   Future getSurhas() async {
     var jsonString = await rootBundle.loadString("lib/assets/quran.json");
     var json = jsonDecode(jsonString);
+    List<Surah> tempList = [];
 
     for (int i = 0; i < 114; i++) {
       final _s = Surah(
         name: json[i]["name"],
-        name_en: json[i]["name_en"],
+        name_translation: json[i]["name_translation"],
         words: json[i]["words"],
         letters: json[i]["letters"],
         verses: json[i]["verses"],
@@ -31,9 +32,12 @@ class _SurhasPageState extends State<SurhasPage> {
         ar: json[i]["ar"],
         array: List.from(json[i]["array"]),
       );
-      s.add(_s);
+      tempList.add(_s);
     }
-    setState(() {});
+
+    setState(() {
+      s = tempList;
+    });
   }
 
   @override
@@ -48,32 +52,31 @@ class _SurhasPageState extends State<SurhasPage> {
       child: Padding(
         padding: const EdgeInsets.all(25),
         child: Column(
+          mainAxisSize: MainAxisSize.max,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Spacer(),
-                const Text("Iqra",
-                    style:
-                        TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                const Spacer(),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.search_outlined),
-                ),
-                IconButton(
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const QuranSettingsPage(),
-                    ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "IQRA",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  icon: const Icon(Icons.settings_rounded),
-                ),
-              ],
+                  IconButton(
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => QuranSettingsPage(),
+                      ),
+                    ),
+                    icon: const Icon(Icons.settings_rounded),
+                  ),
+                ],
+              ),
             ),
             (s.isNotEmpty)
-                ? Expanded(
+                ? Flexible(
                     child: ListView.builder(
                       itemCount: s.length,
                       itemBuilder: (context, index) {
