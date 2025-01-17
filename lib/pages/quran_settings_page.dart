@@ -65,7 +65,9 @@ class _QuranSettingsPageState extends State<QuranSettingsPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Font Size",style:TextStyle(fontFamily:"Odin",fontWeight:FontWeight.bold)),
+                Text("Font Size",
+                    style: TextStyle(
+                        fontFamily: "Odin", fontWeight: FontWeight.bold)),
                 Slider(
                   activeColor: Theme.of(context).colorScheme.primary,
                   inactiveColor: Colors.greenAccent[100],
@@ -98,7 +100,9 @@ class _QuranSettingsPageState extends State<QuranSettingsPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Font Height (space between words)",style:TextStyle(fontFamily:"Odin",fontWeight:FontWeight.bold)),
+                Text("Font Height",
+                    style: TextStyle(
+                        fontFamily: "Odin", fontWeight: FontWeight.bold)),
                 Slider(
                   activeColor: Theme.of(context).colorScheme.primary,
                   inactiveColor: Colors.greenAccent[100],

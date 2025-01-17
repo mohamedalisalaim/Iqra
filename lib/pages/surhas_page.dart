@@ -79,25 +79,21 @@ class _SurhasPageState extends State<SurhasPage> {
                 ? Flexible(
                     child: ListView.builder(
                       itemCount: s.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(
-                              left: 25, right: 25, bottom: 25),
-                          child: SurahTile(
-                            s: s[index],
-                            i: index,
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      ReadQuranPage(s: s[index], i: index),
-                                ),
-                              );
-                            },
-                          ),
-                        );
-                      },
+                      itemBuilder: (context, index) => SurahTile(
+                        s: s[index],
+                        i: index,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ReadQuranPage(
+                                s: s[index],
+                                i: index,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   )
                 : Center(
