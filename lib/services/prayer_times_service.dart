@@ -15,7 +15,7 @@ class PrayerTimesService {
     final date = DateFormat('yyyy-MM-dd').format(now);
 
     final r = await http.get(Uri.parse(
-        "$BASE_URL/$date?latitude=$latitude&longitude=$longitude&method=3"));
+        "$BASE_URL/$date?latitude=$latitude&longitude=$longitude&method=5"));
 
     try {
       var json = jsonDecode(r.body);
@@ -52,14 +52,7 @@ class PrayerTimesService {
     return pos;
   }
 
-  Future getCord() async {
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-    }
-
-    Position pos = await Geolocator.getCurrentPosition();
-
+  Coordinate getCord(Position pos) {
     return Coordinate(pos.latitude, pos.longitude);
   }
 }

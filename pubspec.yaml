@@ -45,6 +45,9 @@ dependencies:
   intl: ^0.20.1
   audioplayers: ^6.1.0
   qibla_direction: ^1.0.1
+  flutter_svg: ^2.0.16
+  flutter_compass: ^0.8.1
+  
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +77,7 @@ flutter:
     - lib/assets/quran.json
     - lib/assets/reciters.json
     - lib/assets/fonts/
+    - lib/assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

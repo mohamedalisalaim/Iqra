@@ -24,6 +24,7 @@ class SurahTile extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            // here the surahs name and index
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -43,18 +44,23 @@ class SurahTile extends StatelessWidget {
                 )
               ],
             ),
+
+            // there are no space so i have to do this
+            Text(
+              "${s.type} - (${ArabicNumber(s.verses.toString())})",
+              style: const TextStyle(
+                fontFamily: "Cairo",
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            // another row
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "عدد ألاحرف: ${ArabicNumber(s.words.toString())}",
-                  style: const TextStyle(
-                    fontFamily: "Cairo",
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  "${s.type} - (${ArabicNumber(s.verses.toString())})",
                   style: const TextStyle(
                     fontFamily: "Cairo",
                     fontWeight: FontWeight.bold,
