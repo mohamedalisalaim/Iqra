@@ -13,7 +13,7 @@ class QiblaPage extends StatefulWidget {
 
 class _QiblaPageState extends State<QiblaPage> {
   bool _hasPermission = false;
-  double? qiblaDir;
+  double qiblaDir = 0;
   final _prayer = PrayerTimesService();
 
   @override
@@ -81,25 +81,27 @@ class _QiblaPageState extends State<QiblaPage> {
           );
         }
 
-        return Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Transform.rotate(
-                  angle: direction * (3.1415926535897932 / 180) * -1,
-                  child: Image.asset("lib/images/indicator.png"),
-                ),
-                Transform.rotate(
-                  angle:
-                      (direction * (3.1415926535897932 / 180) * -1) - qiblaDir!,
-                  child: Image.asset("lib/images/indicator.png"),
-                ),
-                Transform.rotate(
-                  angle: qiblaDir!,
-                  child: Image.asset("lib/images/indicator.png"),
-                ),
-              ],
+        return SafeArea(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Transform.rotate(
+                    angle: direction * (3.1415926535897932 / 180) * -1,
+                    child: Image.asset("lib/images/indicator.png"),
+                  ),
+                  Transform.rotate(
+                    angle: (direction * (3.1415926535897932 / 180) * -1) -
+                        qiblaDir,
+                    child: Image.asset("lib/images/indicator.png"),
+                  ),
+                  Transform.rotate(
+                    angle: qiblaDir,
+                    child: Image.asset("lib/images/indicator.png"),
+                  ),
+                ],
+              ),
             ),
           ),
         );
