@@ -78,6 +78,7 @@ class _SurhasPageState extends State<SurhasPage> {
             (s.isNotEmpty)
                 ? Flexible(
                     child: ListView.builder(
+                      padding: EdgeInsets.all(8),
                       itemCount: s.length,
                       itemBuilder: (context, index) => SurahTile(
                         s: s[index],

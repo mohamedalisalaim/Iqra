@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qibla_direction/qibla_direction.dart';
-import 'dart:math' as math;
-
 import '../services/prayer_times_service.dart';
 
 class QiblaPage extends StatefulWidget {
@@ -14,48 +12,48 @@ class QiblaPage extends StatefulWidget {
 }
 
 class _QiblaPageState extends State<QiblaPage> {
-  final _prayers = PrayerTimesService();
+  bool _hasPermission = false;
   double? qiblaDir;
-  bool _hasPermissions = false;
+  final _prayer = PrayerTimesService();
 
-  getQiblaDir() async {
+  @override
+  void initState() {
+    super.initState();
+    _fetchPermission();
+    _getQiblaDir();
+  }
+
+  void _getQiblaDir() async {
     try {
-      final pos = await _prayers.getCurrentLocation();
-      final cord = _prayers.getCord(pos);
-      //final cord = Coordinate(21.5194682, -0.1360365);
+      final pos = await _prayer.getCurrentLocation();
+      final cord = _prayer.getCord(pos);
 
       setState(() {
         qiblaDir = QiblaDirection.find(cord);
       });
     } catch (e) {
-      return Exception(e.toString());
+      return print(e.toString());
     }
   }
 
-  getPermissions() {
+  void _fetchPermission() {
     Permission.locationWhenInUse.status.then((value) {
       if (mounted) {
-        setState(() => _hasPermissions = (value == PermissionStatus.granted));
+        setState(() {
+          _hasPermission = (value == PermissionStatus.granted);
+        });
       }
     });
-  }
-
-  @override
-  void initState() {
-    getPermissions();
-    getQiblaDir();
-
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        if (_hasPermissions) {
+        if (_hasPermission) {
           return _buildCompass();
         } else {
-          return _buildPermission();
+          return _buildPermissionSheet();
         }
       },
     );
@@ -65,62 +63,59 @@ class _QiblaPageState extends State<QiblaPage> {
     return StreamBuilder<CompassEvent>(
       stream: FlutterCompass.events,
       builder: (context, snapshot) {
-        // error
+        //error
         if (snapshot.hasError) {
           return Text(snapshot.error.toString());
         }
 
-        // loading
+        // wating
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
+          return const CircularProgressIndicator();
+        }
+
+        double? direction = snapshot.data!.heading;
+
+        if (direction == null) {
+          return const Center(
+            child: Text("device deos not support compass"),
           );
         }
 
-        double? dir = snapshot.data!.heading;
-
-        if (dir == null) {
-          return Text("your device does not support compass");
-        }
-
         return Center(
-          child: Column(
-            children: [
-              Transform.rotate(
-                angle: dir * (math.pi / 180) * -1,
-                child: Image.asset(
-                  "lib/assets/image/indicator.png",
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Transform.rotate(
+                  angle: direction * (3.1415926535897932 / 180) * -1,
+                  child: Image.asset("lib/images/indicator.png"),
                 ),
-              ),
-              Transform.rotate(
-                angle: (dir * (math.pi / 180) * -1) - (qiblaDir ?? 0),
-                child: Image.asset(
-                  "lib/assets/image/indicator.png",
+                Transform.rotate(
+                  angle:
+                      (direction * (3.1415926535897932 / 180) * -1) - qiblaDir!,
+                  child: Image.asset("lib/images/indicator.png"),
                 ),
-              ),
-              Transform.rotate(
-                angle: (qiblaDir ?? 0),
-                child: Image.asset(
-                  "lib/assets/image/indicator.png",
+                Transform.rotate(
+                  angle: qiblaDir!,
+                  child: Image.asset("lib/images/indicator.png"),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
     );
   }
 
-  _buildPermission() {
+  Widget _buildPermissionSheet() {
     return Center(
       child: ElevatedButton(
-        child: const Text('Request Permissions'),
-        onPressed: () {
-          Permission.locationWhenInUse.request().then((value) {
-            getPermissions();
-          });
-        },
-      ),
+          onPressed: () {
+            Permission.locationWhenInUse.request().then((value) {
+              _fetchPermission();
+            });
+          },
+          child: const Text("Request Permission")),
     );
   }
 }
