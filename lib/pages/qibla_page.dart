@@ -74,8 +74,6 @@ class _QiblaPageState extends State<QiblaPage> {
         }
 
         double? direction = snapshot.data!.heading;
-        double adjustedHeading = direction - qiblaDir;
-        adjustedHeading = (adjustedHeading + 360) % 360;
 
         if (direction == null) {
           return const Center(
@@ -83,7 +81,8 @@ class _QiblaPageState extends State<QiblaPage> {
           );
         }
 
-        double dir = direction * (3.1415926535897932 / 180) * -1;
+	double adjustedHeading = direction - qiblaDir;
+        adjustedHeading = (adjustedHeading + 360) % 360;
 
         return SafeArea(
           child: Padding(
