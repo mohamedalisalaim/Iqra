@@ -74,6 +74,8 @@ class _QiblaPageState extends State<QiblaPage> {
         }
 
         double? direction = snapshot.data!.heading;
+        double adjustedHeading = direction - qiblaDir;
+        adjustedHeading = (adjustedHeading + 360) % 360;
 
         if (direction == null) {
           return const Center(
@@ -90,17 +92,10 @@ class _QiblaPageState extends State<QiblaPage> {
               child: Column(
                 children: [
                   Transform.rotate(
-                    angle: dir,
+                    angle: (adjustedHeading * (3.1415926535897932 / 180)),
                     child: Image.asset("lib/assets/images/indicator.png"),
                   ),
-                  Transform.rotate(
-                    angle: dir - qiblaDir,
-                    child: Image.asset("lib/assets/images/indicator.png"),
-                  ),
-                  Transform.rotate(
-                    angle: qiblaDir,
-                    child: Image.asset("lib/assets/images/indicator.png"),
-                  ),
+                  
                 ],
               ),
             ),
