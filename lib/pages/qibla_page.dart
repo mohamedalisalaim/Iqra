@@ -81,24 +81,25 @@ class _QiblaPageState extends State<QiblaPage> {
           );
         }
 
+        double dir = direction * (3.1415926535897932 / 180) * -1;
+
         return SafeArea(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
               child: Column(
                 children: [
                   Transform.rotate(
-                    angle: direction * (3.1415926535897932 / 180) * -1,
-                    child: Image.asset("lib/images/indicator.png"),
+                    angle: dir,
+                    child: Image.asset("lib/assets/images/indicator.png"),
                   ),
                   Transform.rotate(
-                    angle: (direction * (3.1415926535897932 / 180) * -1) -
-                        qiblaDir,
-                    child: Image.asset("lib/images/indicator.png"),
+                    angle: dir - qiblaDir,
+                    child: Image.asset("lib/assets/images/indicator.png"),
                   ),
                   Transform.rotate(
                     angle: qiblaDir,
-                    child: Image.asset("lib/images/indicator.png"),
+                    child: Image.asset("lib/assets/images/indicator.png"),
                   ),
                 ],
               ),
