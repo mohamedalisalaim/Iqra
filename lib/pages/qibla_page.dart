@@ -81,7 +81,7 @@ class _QiblaPageState extends State<QiblaPage> {
           );
         }
 
-	double adjustedHeading = direction - qiblaDir;
+	double adjustedHeading = (direction ?? 0) - qiblaDir;
         adjustedHeading = (adjustedHeading + 360) % 360;
 
         return SafeArea(
