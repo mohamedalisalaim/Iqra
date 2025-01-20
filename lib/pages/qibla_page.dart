@@ -81,23 +81,19 @@ class _QiblaPageState extends State<QiblaPage> {
           );
         }
 
-	double adjustedHeading = (direction ?? 0) - qiblaDir;
-        adjustedHeading = (adjustedHeading + 360) % 360;
+        // double adjustedHeading = direction - qiblaDir;
+        // adjustedHeading = (adjustedHeading + 360) % 360;
 
         return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Column(
-                children: [
-                  Transform.rotate(
-                    angle: (adjustedHeading * (3.1415926535897932 / 180)),
-                    child: Image.asset("lib/assets/images/indicator.png"),
-                  ),
-                  
-                ],
-              ),
-            ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset("lib/assets/images/compass.png"),
+              Transform.rotate(
+                angle: (direction - qiblaDir) * (3.141592653589793 / 180),
+                child: Image.asset("lib/assets/images/indicator.png"),
+              )
+            ],
           ),
         );
       },
