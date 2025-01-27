@@ -6,9 +6,11 @@ class QuranSettings extends ChangeNotifier {
   bool showEnglishText = false;
 
   // fonts
-  double fontSize = 18;
+  double fontSize = 24;
   double spaceBetweenWords = 1.5;
   bool quranFontBold = false;
+
+  double fontSizeEN = 14;
 
   void changeReadingMode() {
     verseByVerse = !verseByVerse;
@@ -22,6 +24,11 @@ class QuranSettings extends ChangeNotifier {
 
   void changeFontSize(double size) {
     fontSize = size;
+    notifyListeners();
+  }
+
+  void changeFontSizeEn(double size) {
+    fontSizeEN = size;
     notifyListeners();
   }
 

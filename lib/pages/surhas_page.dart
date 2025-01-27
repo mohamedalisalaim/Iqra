@@ -30,6 +30,7 @@ class _SurhasPageState extends State<SurhasPage> {
         verses: json[i]["verses"],
         type: json[i]["type"],
         ar: json[i]["ar"],
+        en: json[i]["en"],
         array: List.from(json[i]["array"]),
       );
       tempList.add(_s);
@@ -56,21 +57,26 @@ class _SurhasPageState extends State<SurhasPage> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
                 children: [
-                  const Text(
-                    "IQRA",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  IconButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => QuranSettingsPage(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "IQRA",
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    icon: const Icon(Icons.settings_rounded),
+                      IconButton(
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const QuranSettingsPage(),
+                          ),
+                        ),
+                        icon: const Icon(Icons.settings_rounded),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -78,7 +84,7 @@ class _SurhasPageState extends State<SurhasPage> {
             (s.isNotEmpty)
                 ? Flexible(
                     child: ListView.builder(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(25),
                       itemCount: s.length,
                       itemBuilder: (context, index) => SurahTile(
                         s: s[index],
@@ -101,7 +107,7 @@ class _SurhasPageState extends State<SurhasPage> {
                     child: CircularProgressIndicator(
                       color: Theme.of(context).colorScheme.primary,
                     ),
-                  )
+                  ),
           ],
         ),
       ),

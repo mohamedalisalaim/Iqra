@@ -24,18 +24,18 @@ class _WordByWordQuranState extends State<WordByWordQuran> {
       itemCount: widget.s.array.length,
       itemBuilder: (context, index) {
         return Container(
-          padding: EdgeInsets.all(25),
-          margin: EdgeInsets.all(12),
-          decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondary,borderRadius:BorderRadius.circular(12)),
+          padding: const EdgeInsets.all(25),
+          margin: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondary,
+              borderRadius: BorderRadius.circular(12)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              // verse number
-              Text(widget.s.array[index]["id"].toString()),
               // arbic quran
               SelectableText(
                 widget.s.array[index]["ar"],
-                textAlign: TextAlign.start,
+                textAlign: TextAlign.justify,
                 textDirection: TextDirection.rtl,
                 style: TextStyle(
                   fontFamily: "Uthman",
@@ -56,8 +56,12 @@ class _WordByWordQuranState extends State<WordByWordQuran> {
                 SelectableText(
                   widget.s.array[index]["en"],
                   textDirection: TextDirection.ltr,
-                  style: TextStyle(fontFamily: "Odin"),
-                )
+                  style: TextStyle(
+                    fontFamily: "Odin",
+                    fontSize: Provider.of<QuranSettings>(context, listen: false)
+                        .fontSizeEN,
+                  ),
+                ),
             ],
           ),
         );

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class SettingTile extends StatelessWidget {
   final String text;
@@ -18,7 +19,7 @@ class SettingTile extends StatelessWidget {
       children: [
         Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: "Odin",
           ),
         ),

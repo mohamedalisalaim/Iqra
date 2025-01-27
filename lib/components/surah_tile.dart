@@ -16,6 +16,7 @@ class SurahTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(8),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
       child: MaterialButton(
         color: Theme.of(context).colorScheme.primary,

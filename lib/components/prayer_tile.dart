@@ -9,8 +9,9 @@ class PrayerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.circular(12)),
+        color: Theme.of(context).colorScheme.primary,
+        borderRadius: BorderRadius.circular(12),
+      ),
       margin: const EdgeInsets.all(12),
       padding: const EdgeInsets.all(12),
       child: Row(

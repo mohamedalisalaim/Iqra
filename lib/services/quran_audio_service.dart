@@ -2,48 +2,49 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:iqra/models/reciter.dart';
-import 'package:iqra/models/surah.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class QuranAudioService {
-  static const String BASE_URL =
-      "https://cdn.islamic.network/quran/audio-surah";
-
   Future<bool> checkPermission() async {
     final per = await Permission.storage.request();
 
     return per.isGranted;
   }
 
-  Future<String> downloadSurhas(Reciter r, Surah s, int number) async {
-    try {
-      final dir = await getApplicationDocumentsDirectory();
-      final fileFolder =
-          Directory('${dir.path}/${r.identifier}/${number}_${r.bitrate}');
+  Future<bool> checkFileExist(filePath) async {
+    File file = File(filePath);
+    return await file.exists();
+  }
 
-      if (!await fileFolder.exists()) {
-        await fileFolder.create(recursive: true);
-      }
+  Future<void> downloadSurah(Reciter r, int number) async {
+    if (await Permission.storage.request().isGranted) {
+      try {
+        String linkToDownload =
+            "https://cdn.islamic.network/quran/audio-surah/${r.bitrate}/${r.identifier}/$number";
 
-      for (int i = 1; i < s.array.length; i++) {
-        String ayahUrl = "$BASE_URL/${r.bitrate}/${r.identifier}/${i + 1}.mp3";
-        final ayahPath =
-            "${fileFolder.path}/${r.bitrate}/${r.identifier}/${i + 1}.mp3";
+        Directory appDocDir = await getApplicationDocumentsDirectory();
+        String fileName = "${appDocDir.path}/${r.name}/$number";
 
-        final res = await http.get(Uri.parse(ayahUrl));
+	if (await checkFileExist(fileName)) {
+          print("File already exists: $fileName");
+          return;
+        }
+
+        final res = await http.get(Uri.parse(linkToDownload));
 
         if (res.statusCode == 200) {
-          final file = File(ayahPath);
-          await file.writeAsBytes(res.bodyBytes);
+          File file = File(fileName);
+          file.writeAsBytes(res.bodyBytes);
+          print("File is being Downloaded");
         } else {
-          print("soory");
+          print("erorr");
         }
+      } catch (e) {
+        print(e.toString());
       }
-      return fileFolder.path;
-    } catch (e) {
-      print(e);
-      return "";
+    } else {
+      print("erorr permission error");
     }
   }
 }

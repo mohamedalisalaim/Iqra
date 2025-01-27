@@ -9,6 +9,7 @@ class Surah {
   final String type;
 
   final String ar;
+  final String en;
   final List<dynamic> array;
 
   Surah({
@@ -19,6 +20,7 @@ class Surah {
     required this.verses,
     required this.type,
     required this.ar,
+    required this.en,
     required this.array,
   });
 }
